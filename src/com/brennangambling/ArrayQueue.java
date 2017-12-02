@@ -85,6 +85,7 @@ public class ArrayQueue {
         String[] oldQueue = queue;
         queue = new String[newLength];
         int tempRear = rear;
+        System.out.println("\n\n");
         for (int i = 0; i <= currentSize; i++) {
             System.out.println("" + tempRear);
             queue[i] = oldQueue[tempRear];
@@ -94,7 +95,7 @@ public class ArrayQueue {
             }
         }
         this.rear = currentSize;
-        this.front = 0;
+        this.front = 1;
     }
 
     @Override
