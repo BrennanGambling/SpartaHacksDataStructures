@@ -5,7 +5,7 @@ public class ArrayStack {
     //the current position in the array.
     private int position;
     //the stack of objects.
-    private Object[] stack;
+    private String[] stack;
 
     /**
      * Creates a ArrayStack with an array length of startSize.
@@ -13,14 +13,14 @@ public class ArrayStack {
      */
     public ArrayStack(int startSize) {
         this.position = -1;
-        this.stack = new Object[startSize];
+        this.stack = new String[startSize];
     }
 
     /**
      * Adds an object to the top of the stack.
      * @param object the object to be added.
      */
-    public void push(Object object) {
+    public void push(String object) {
         //increment the position value by 1.
         position++;
         //if the position value is greater than the last index in the stack array.
@@ -44,7 +44,7 @@ public class ArrayStack {
         //keep a reference to the old array.
         Object[] oldStack = stack;
         //create a new array with the new length.
-        stack = new Object[newLength];
+        stack = new String[newLength];
         //copy the contents of the old array into the new array.
         System.arraycopy(oldStack, 0, stack, 0, oldStack.length);
     }
@@ -53,17 +53,30 @@ public class ArrayStack {
      * Removes an object from the top of the stack.
      * @return the object at the top of the stack.
      */
-    public Object pop() {
+    public String pop() {
         if (isEmpty()) {
             //Because there are no objects to pop off the stack return null. You could also throw an exception here.
             return null;
         } else {
             //return the object at the current position in the stack array.
             //this position in the array will later be over written when push is called.
-            Object returnObject = stack[position];
+            String returnObject = stack[position];
             //decrement the position value by 1.
             position--;
             return returnObject;
+        }
+    }
+
+    /**
+     * Returns an object from the top of stack without removing it.
+     * @return the object at the top of the stack.
+     */
+    public String peek() {
+        if (isEmpty()) {
+            //there is no element to "peek at" as the stack is empty.
+            return null;
+        } else {
+            return stack[position];
         }
     }
 
@@ -81,5 +94,14 @@ public class ArrayStack {
     public boolean isEmpty() {
         //if the position is less than 0 push has not yet been called and there is therefore nothing in the Stack.
         return position < 0;
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = position; i >= 0; i--) {
+            output += "\n" + stack[i];
+        }
+        return output;
     }
 }
