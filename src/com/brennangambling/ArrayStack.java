@@ -88,7 +88,7 @@ public class ArrayStack {
     }
 
     /**
-     * Indicates where any elements are stored.
+     * Indicates whether or not any elements are stored in the stack.
      * @return true if the Stack has any elements, false if it does not.
      */
     public boolean isEmpty() {
