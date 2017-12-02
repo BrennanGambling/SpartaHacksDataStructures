@@ -58,7 +58,7 @@ public class ArrayQueue {
             //move the front position back one/increment by one.
             front++;
             //if the front end of the queue has passed the bounds of the array wrap around to the front of the array.
-            if(front > queue.length-1){
+            if(front >= queue.length){
                 front = 0;
             }
             //decrement the current size by 1.
@@ -81,26 +81,28 @@ public class ArrayQueue {
      */
     private void growQueue(int by){
         //create new array with double size as the current one.
-        int newLength = this.queue.length + by;
-        String[] newArr = new String[newLength];
-        //copy elements to new array, copy from front to rear
-        //this is used so the queue can be copied from its front to its rear instead of the elements being copied in
-        //the order that they are stored in the array.
-        int tmpFront = front;
-        //the entire queue will have been copied once the counter reaches the currentSize of the queue.
-        //this will place the entire queue from front to rear in the new array no matter how it was stored in the old array.
-        for (int i = 0; i < currentSize; i++) {
-            newArr[i] = this.queue[tmpFront];
-            tmpFront++;
-            //if the end of the old array has been reached, loop back to the front of the array.
-            if(tmpFront == this.queue.length){
-                tmpFront = 0;
+        int newLength = queue.length + by;
+        String[] oldQueue = queue;
+        queue = new String[newLength];
+        int tempRear = rear;
+        for (int i = 0; i <= currentSize; i++) {
+            System.out.println("" + tempRear);
+            queue[i] = oldQueue[tempRear];
+            tempRear++;
+            if (tempRear >= oldQueue.length) {
+                tempRear = 0;
             }
         }
-        //set the new array.
-        this.queue = newArr;
-        //reset front and rear values
-        this.front = 0;
         this.rear = currentSize;
+        this.front = 0;
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = front; i <= rear; i++) {
+            output += "\n" + queue[i];
+        }
+        return output;
     }
 }
